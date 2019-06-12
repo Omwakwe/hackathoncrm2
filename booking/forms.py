@@ -32,6 +32,8 @@ class BookingForm(forms.ModelForm):
         attrs={'placeholder': 'Email', 'class': "form-control input-sm", }))
     huduma_number = forms.CharField(required=True, widget=forms.TextInput(
         attrs={'placeholder': 'Huduma number', 'class': "form-control input-sm", }))
+    age = forms.CharField(required=True, widget=forms.TextInput(
+        attrs={'placeholder': 'Your age', 'class': "form-control input-sm", }))
     booking_date = forms.DateField(required=True, widget=forms.TextInput(
         attrs={'placeholder': 'Booking date', 'class': "form-control input-sm datepicker2", }))
     checkout_date = forms.DateField(required=True, widget=forms.TextInput(
@@ -48,4 +50,4 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['gender', 'huduma_number', 'booking_date',
-                  'checkout_date', 'disabled', 'status', 'name', 'email', 'room', ]
+                  'checkout_date', 'disabled', 'status', 'name', 'email', 'room', 'age', ]

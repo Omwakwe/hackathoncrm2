@@ -38,6 +38,7 @@ class Booking(models.Model):
     checkout_date = models.DateField()
     status = models.IntegerField(default=0)  # 0 not cancelled,1 cancelled
     disabled = models.BooleanField(default=False)
+    age = models.IntegerField(null=True)
     # the following is for auding
     created_by = models.IntegerField(null=True)  # user who created
     created_date = models.DateTimeField(default=timezone.now)
