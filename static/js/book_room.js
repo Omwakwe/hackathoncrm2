@@ -23,6 +23,17 @@ $(document).ready(function() {
     return /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
   }
 
+  $("#info").hide();
+
+  //   $(".Cancel").on("click", function(event) {
+  //     event.preventDefault();
+
+  //     $("#info").show();
+  //     setTimeout($("#info").hide(), 3000);
+
+  //     // save_booking();
+  //   });
+
   $("#book_room_form").on("submit", function(event) {
     event.preventDefault();
     // $("#save_booking").removeClass("btn-success");
@@ -47,6 +58,7 @@ $(document).ready(function() {
         // $("#save_booking").html("Save");
         $("#save_booking").prop("disabled", false);
         console.log("json", json);
+        location.href = "/booking/view/";
 
         //call the function that returns a string('verdict') to check if
         //errors present. If no errors, we proceed to print rows(table)

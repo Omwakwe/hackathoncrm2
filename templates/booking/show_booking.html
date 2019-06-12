@@ -1,0 +1,38 @@
+{% extends "booking/base.html" %}
+{% load static %}
+{% block head_title %}Book room{% endblock %}
+{% block styles %}
+    
+{% endblock %}
+{% block content %}
+<h1>Current room bookings</h1>
+<div id='info' class="alert alert-warning">
+  <strong>Warning!</strong> Cancelling booking refunds 40%.
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th>customer name</th>
+        <th>Huduma number</th>
+        <th>Cost</th>
+        <th>Date Booked</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for booking in  bookings %}
+      <tr>
+        <td>{{booking.name}}</td>
+        <td>{{booking.huduma_number}}</td>
+        <td>{{booking.real_price}}</td>
+        <td>{{booking.booking_date}}</td>
+        <td><button type="button" class="btn btn-danger Cancel">Cancel Booking</button></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/book_room.js' %}"></script>
+{% endblock %}

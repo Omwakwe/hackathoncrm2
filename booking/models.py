@@ -51,3 +51,11 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.huduma_number
+
+    @property
+    def real_price(self):
+        ''' apply discount if disabled'''
+        if self.disabled:
+            return self.room.cost_per_night*Decimal(0.4)
+        else:
+            return self.room.cost_per_night
