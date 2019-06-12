@@ -98,8 +98,16 @@ class BookingReport(LoginRequiredMixin, View):
         revenue = 0
         bookings = Booking.objects.filter(deleted=False)
         for booking in bookings:
+            cost_is = 0
             if booking.disabled:
-                revenue = revenue + (booking.room.cost_per_night*Decimal(0.4))
+                cost_is = booking.room.cost_per_night*Decimal(0.4)
+                if booking.status == 0:
+                    cost_is = cost_is * Decimal(0.6)
+                # revenue = revenue + (booking.room.cost_per_night*Decimal(0.4))
             else:
-                revenue = revenue + booking.room.cost_per_night
+                cost_is = booking.room.cost_per_night
+                if booking.status == 0:
+                    cost_is = cost_is * Decimal(0.6)
+                # revenue = revenue + booking.room.cost_per_night
+            revenue = revenue + cost_is
         return render(request, self.template_name, {'revenue': revenue, 'booked': booked, 'booked_exec': booked_exec, 'booked_stand': booked_stand, 'booked_economy': booked_economy})
