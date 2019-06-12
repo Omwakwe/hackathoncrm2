@@ -14,8 +14,11 @@
       <tr>
         <th>customer name</th>
         <th>Huduma number</th>
+        <th>Room type</th>
+        <th>Disability</th>
         <th>Cost</th>
         <th>Date Booked</th>
+        <th>Checkout Date</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -24,9 +27,16 @@
       <tr>
         <td>{{booking.name}}</td>
         <td>{{booking.huduma_number}}</td>
-        <td>{{booking.real_price}}</td>
+        <td>{{booking.room.type_name}}</td>
+        {% if booking.disabled == 0 %}
+        <td>Not disabled</td>
+        {% else %}
+        <td>Disabled</td>
+        {% endif %}
+        <td>Ksh. {{booking.real_price |floatformat:2}}</td>
         <td>{{booking.booking_date}}</td>
-        <td><button type="button" class="btn btn-danger Cancel">Cancel Booking</button></td>
+        <td>{{booking.checkout_date}}</td>
+        <td><button type="button" class="btn btn-danger cancel">Cancel Booking</button></td>
       </tr>
       {% endfor %}
     </tbody>

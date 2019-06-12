@@ -25,14 +25,15 @@ $(document).ready(function() {
 
   $("#info").hide();
 
-  //   $(".Cancel").on("click", function(event) {
-  //     event.preventDefault();
+  $(".cancel").on("click", function(event) {
+    event.preventDefault();
+    console.log("cancel called");
 
-  //     $("#info").show();
-  //     setTimeout($("#info").hide(), 3000);
-
-  //     // save_booking();
-  //   });
+    $("#info").show();
+    setTimeout(function() {
+      $("#info").hide();
+    }, 3000);
+  });
 
   $("#book_room_form").on("submit", function(event) {
     event.preventDefault();

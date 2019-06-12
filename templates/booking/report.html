@@ -1,0 +1,35 @@
+{% extends "booking/base.html" %}
+{% load static %}
+{% block head_title %}Book room{% endblock %}
+{% block styles %}
+    
+{% endblock %}
+{% block content %}
+<h1>Current room Report</h1>
+<ul class="list-group">
+  <li class="list-group-item">
+    <span class="badge">{{booked}}</span>
+    Booked rooms
+  </li>
+  <li class="list-group-item">
+    <span class="badge">{{booked_exec}}</span>
+    Booked Executive rooms
+  </li>
+  <li class="list-group-item">
+    <span class="badge">{{booked_stand}}</span>
+    Booked Standard rooms
+  </li>
+  <li class="list-group-item">
+    <span class="badge">{{booked_economy}}</span>
+    Booked Economy rooms
+  </li>
+  <li class="list-group-item">
+    <span class="badge">{{revenue |floatformat:2}}</span>
+    Total amount generated
+  </li>
+</ul>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/book_room.js' %}"></script>
+{% endblock %}

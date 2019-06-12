@@ -51,8 +51,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/booking/">Book room</a></li>
             {% if user.is_authenticated %}
+            <li><a href="/booking/">Book room</a></li>
+            <li><a href="/booking/view/">View Bookings</a></li>
+            <li><a href="/booking/report/">View Report</a></li>
+            
             <li><a href="/accounts/logout/">Log out</a></li>
             {% else %}
             <li><a href="/accounts/login/">Log in</a></li>

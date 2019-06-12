@@ -4,6 +4,8 @@ from django.views import View
 from booking.forms import BookingForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from booking.models import Booking
+from django.db.models import Avg, Count, Min, Sum
+from decimal import Decimal
 
 
 class Home(View):
@@ -58,3 +60,26 @@ class ShowBookingView(LoginRequiredMixin, View):
         # form = self.form_class
         booking = Booking.objects.all()
         return render(request, self.template_name, {'bookings': booking})
+
+
+class BookingReport(LoginRequiredMixin, View):
+    '''
+    a view for showing booked rooms report
+    '''
+    # form_class = BookingForm
+    template_name = 'booking/report.html'
+
+    def get(self, request, *args, **kwargs):
+        # form = self.form_class
+        booked = Booking.objects.filter().count()
+        booked_exec = Booking.objects.filter(room_id=1).count()
+        booked_stand = Booking.objects.filter(room_id=2).count()
+        booked_economy = Booking.objects.filter(room_id=3).count()
+        revenue = 0
+        bookings = Booking.objects.filter(deleted=False)
+        for booking in bookings:
+            if booking.disabled:
+                revenue = revenue + (booking.room.cost_per_night*Decimal(0.4))
+            else:
+                revenue = revenue + booking.room.cost_per_night
+        return render(request, self.template_name, {'revenue': revenue, 'booked': booked, 'booked_exec': booked_exec, 'booked_stand': booked_stand, 'booked_economy': booked_economy})
