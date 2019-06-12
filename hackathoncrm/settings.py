@@ -25,9 +25,10 @@ SECRET_KEY = '(*_aryhe*c!jfzo270f1vv@h&b$h$=r&@1vuciwb3(2*0rfd6h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
-
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = "/admin/"
 # Application definition
 
 INSTALLED_APPS = [
