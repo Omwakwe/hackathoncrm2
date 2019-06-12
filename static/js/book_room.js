@@ -28,11 +28,10 @@ $(document).ready(function() {
   $(".cancel").on("click", function(event) {
     event.preventDefault();
     console.log("cancel called");
+    $(".cancel").prop("disabled", true);
 
     $("#info").show();
-    setTimeout(function() {
-      $("#info").hide();
-    }, 3000);
+
     cancelid = $(this).prop("id");
     cancel_booking(cancelid);
   });
@@ -55,24 +54,24 @@ $(document).ready(function() {
         // $("#save_booking").html("Save");
         $("#save_booking").prop("disabled", false);
         console.log("json", json);
-        location.href = "/booking/view/";
+        setTimeout(function() {
+          $("#info").hide();
+          location.href = "/booking/view/";
+        }, 4000);
+        $(".cancel").prop("disabled", false);
 
         //call the function that returns a string('verdict') to check if
         //errors present. If no errors, we proceed to print rows(table)
         // returned_verdict = success_checker(json.success, json.success_msg);
       },
       error: function(xhr, errmsg, err) {
-        //remove loading gif, enable add button
-        $("#save_booking").prop("disabled", false);
+        $(".cancel").prop("disabled", false);
       }
     });
   }
 
   $("#book_room_form").on("submit", function(event) {
     event.preventDefault();
-    // $("#save_booking").removeClass("btn-success");
-    // $("#save_booking").addClass("btn-default");
-
     $("#save_booking").prop("disabled", true);
     console.log("book_room_form called");
     save_booking();

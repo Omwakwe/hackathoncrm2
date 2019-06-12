@@ -56,6 +56,12 @@ class Booking(models.Model):
     def real_price(self):
         ''' apply discount if disabled'''
         if self.disabled:
-            return self.room.cost_per_night*Decimal(0.4)
+            if self.status == 1:
+                return (self.room.cost_per_night*Decimal(0.4)) * Decimal(0.6)
+            else:
+                return self.room.cost_per_night*Decimal(0.4)
         else:
-            return self.room.cost_per_night
+            if self.status == 1:
+                return self.room.cost_per_night * Decimal(0.6)
+            else:
+                return self.room.cost_per_night
