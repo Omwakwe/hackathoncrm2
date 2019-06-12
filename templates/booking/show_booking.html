@@ -19,6 +19,7 @@
         <th>Cost</th>
         <th>Date Booked</th>
         <th>Checkout Date</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -36,7 +37,12 @@
         <td>Ksh. {{booking.real_price |floatformat:2}}</td>
         <td>{{booking.booking_date}}</td>
         <td>{{booking.checkout_date}}</td>
-        <td><button type="button" class="btn btn-danger cancel">Cancel Booking</button></td>
+        {% if booking.status == 0 %}
+        <td>Active</td>
+        {% else %}
+        <td>Cancelled</td>
+        {% endif %}
+        <td><button id="{{booking.id}}" type="button" class="btn btn-danger cancel">Cancel Booking</button></td>
       </tr>
       {% endfor %}
     </tbody>

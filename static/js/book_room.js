@@ -33,7 +33,40 @@ $(document).ready(function() {
     setTimeout(function() {
       $("#info").hide();
     }, 3000);
+    cancelid = $(this).prop("id");
+    cancel_booking(cancelid);
   });
+
+  function cancel_booking(cancelid) {
+    var formdata = $("#book_room_form").serializeArray();
+    formdata.push({
+      name: "cancelid",
+      value: cancelid
+    });
+    $.ajax({
+      url: "/booking/view/",
+      type: "POST",
+      data: formdata,
+
+      success: function(json) {
+        //Display row results from database
+        // $("#save_booking").removeClass("btn-default");
+        // $("#save_booking").addClass("btn-success");
+        // $("#save_booking").html("Save");
+        $("#save_booking").prop("disabled", false);
+        console.log("json", json);
+        location.href = "/booking/view/";
+
+        //call the function that returns a string('verdict') to check if
+        //errors present. If no errors, we proceed to print rows(table)
+        // returned_verdict = success_checker(json.success, json.success_msg);
+      },
+      error: function(xhr, errmsg, err) {
+        //remove loading gif, enable add button
+        $("#save_booking").prop("disabled", false);
+      }
+    });
+  }
 
   $("#book_room_form").on("submit", function(event) {
     event.preventDefault();

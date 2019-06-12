@@ -61,6 +61,26 @@ class ShowBookingView(LoginRequiredMixin, View):
         booking = Booking.objects.all()
         return render(request, self.template_name, {'bookings': booking})
 
+    def post(self, request, *args, **kwargs):
+        cancelid = request.POST['cancelid']
+        print('request.POST ', request.POST)
+        responsedata = {}
+        if Booking.objects.filter(id=cancelid).exists():
+            try:
+                booking = Booking.objects.filter(id=cancelid)[0]
+                booking.status = 1
+                booking.save()
+            except Exception as e:
+                print("cant cancel booking ", e)
+
+            responsedata['success'] = 'yes'
+            responsedata['success_msg'] = "Cancelled room successfully"
+        else:
+            responsedata['success'] = 'no'
+            responsedata['success_msg'] = "Error Cancelling room"
+            print('errors ', form.errors)
+        return JsonResponse(responsedata)
+
 
 class BookingReport(LoginRequiredMixin, View):
     '''
